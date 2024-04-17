@@ -21,6 +21,8 @@ steps:
     azureSubscription: 'helm'
     azureResourceGroup: 'aks-testing'
     kubernetesCluster: 'aks-test-cluster'
+    namespace: 'dev'
     command: 'install'
     chartType: 'Name'
     chartName: 'firstchart'
+    valueFile: 'values-dev.yaml'
