@@ -41,4 +41,4 @@ steps:
     chartType: 'Name'
     chartName: 'firstchart'
     releaseName: 'first'
-    valueFile: 'firstchart/prod-dev.yaml'
+    valueFile: 'firstchart/values-prod.yaml'
