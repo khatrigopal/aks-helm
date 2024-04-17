@@ -13,3 +13,4 @@ spec:
    selector:
         run: my-nginx-{{ .Values.ns }}
    type: LoadBalancer
+
