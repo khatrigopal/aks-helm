@@ -1,0 +1,3 @@
+replicas: 5
+ns: prod
+port: 8081
