@@ -26,4 +26,4 @@ steps:
     chartType: 'Name'
     chartName: 'firstchart'
     releaseName: 'first'
-    valueFile: 'values-dev.yaml'
+    valueFile: ' values-dev.yaml'
