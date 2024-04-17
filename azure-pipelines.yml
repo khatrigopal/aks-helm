@@ -46,9 +46,10 @@ stages:
 
 - stage: 'Package_deploy_on_Prod'
   displayName: 'Package_deploy_on_Prod'
+  environment: 'helm-approvar'
   jobs:
   - job: 'Prod'
-    environment: 'helm-approvar'
+    
     
     displayName: 'Package_deploy_on_Prod'
     steps:
