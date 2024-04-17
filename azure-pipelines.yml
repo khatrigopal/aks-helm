@@ -51,9 +51,7 @@ stages:
   
   jobs:
 
-  - deployment: Approval
-    displayName: 'Deployment Approval'
-    environment: 'helm-approver'
+  
   - job: 'Prod'
     
     
