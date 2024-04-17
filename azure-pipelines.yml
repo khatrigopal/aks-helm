@@ -48,13 +48,15 @@ stages:
   displayName: 'Package_deploy_on_Prod'
   
   
+  
   jobs:
+  environment: 'helm-approver'
   - job: 'Prod'
     
     
     
     displayName: 'Package_deploy_on_Prod'
-    environment: 'helm-approver'
+    
     steps:
     - task: HelmDeploy@0
       inputs:
