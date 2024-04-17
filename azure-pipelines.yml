@@ -44,4 +44,21 @@ stages:
         releaseName: 'first'
         valueFile: 'firstchart/values-dev.yaml'
 
-
+- stage: 'Package_deploy_on_Prod'
+  displayName: 'Package_deploy_on_Prod'
+  jobs:
+  - job: 'Prod'
+    displayName: 'Package_deploy_on_Prod'
+    steps:
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'helm'
+        azureResourceGroup: 'aks-testing'
+        kubernetesCluster: 'aks-test-cluster'
+        namespace: 'prod'
+        command: 'upgrade'
+        chartType: 'Name'
+        chartName: 'firstchart'
+        releaseName: 'first'
+        valueFile: 'firstchart/values-prod.yaml'
