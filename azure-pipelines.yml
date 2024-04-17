@@ -16,6 +16,7 @@ steps:
     installKubectl: true
 
 - task: HelmDeploy@0
+  displayName: Deploy chart on dev
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscription: 'helm'
@@ -27,3 +28,17 @@ steps:
     chartName: 'firstchart'
     releaseName: 'first'
     valueFile: 'firstchart/values-dev.yaml'
+
+- task: HelmDeploy@0
+  displayName: Deploy chart on Prod
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscription: 'helm'
+    azureResourceGroup: 'aks-testing'
+    kubernetesCluster: 'aks-test-cluster'
+    namespace: 'dev'
+    command: 'upgrade'
+    chartType: 'Name'
+    chartName: 'firstchart'
+    releaseName: 'first'
+    valueFile: 'firstchart/prod-dev.yaml'
