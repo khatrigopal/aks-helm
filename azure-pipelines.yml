@@ -1,0 +1,64 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+ 
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+
+- stage: 'helm_install'
+  displayName: 'Helm Install'
+  jobs:
+  - job: 'helm_install'
+    displayName: 'Helm Install'
+   
+    steps:
+    - task: HelmInstaller@0
+      inputs:
+        helmVersion: '2.14.1'
+        installKubectl: true
+
+- stage: 'Package_deploy_on_Dev'
+  displayName: 'Package_deploy_on_Dev'
+  jobs:
+  - job: 'Dev'
+    displayName: 'Package_deploy_on_Dev'
+   
+    steps:
+    - task: HelmDeploy@0
+      displayName: 'Deploy chart on dev'
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'helm'
+        azureResourceGroup: 'aks-testing'
+        kubernetesCluster: 'aks-test-cluster'
+        namespace: 'dev'
+        command: 'upgrade'
+        chartType: 'Name'
+        chartName: 'firstchart'
+        releaseName: 'first'
+        valueFile: 'firstchart/values-dev.yaml'
+
+- stage: 'Package_deploy_on_Prod'
+  displayName: 'Package_deploy_on_Prod'
+  jobs:
+  - job: 'Prod'
+    displayName: 'Package_deploy_on_Prod'
+    steps:
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'helm'
+        azureResourceGroup: 'aks-testing'
+        kubernetesCluster: 'aks-test-cluster'
+        namespace: 'prod'
+        command: 'upgrade'
+        chartType: 'Name'
+        chartName: 'firstchart'
+        releaseName: 'first'
+        valueFile: 'firstchart/values-prod.yaml'
