@@ -46,10 +46,11 @@ stages:
 
 - stage: 'Package_deploy_on_Prod'
   displayName: 'Package_deploy_on_Prod'
+  environment: 'helm-approver'
   
   jobs:
   - job: 'Prod'
-    environment: 'helm-approver'
+    
     
     
     displayName: 'Package_deploy_on_Prod'
