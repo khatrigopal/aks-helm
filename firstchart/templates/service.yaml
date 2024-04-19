@@ -12,5 +12,5 @@ spec:
      protocol: TCP
    selector:
         run: my-nginx-{{ .Values.ns }}
-   type: LoadBalancer
+   type: NodePort
 
